@@ -13,15 +13,15 @@ int main(int argc, char* argv[])
             a = stoi(argv[2]);
             b = stoi(argv[3]);
     }
-    if (string(argv[1])=="add" && argv[2]!=NULL & argv[3]!=NULL)
+    if (string(argv[1])=="add" && argv[2]!=NULL & argv[3]!=NULL && argv[4]==NULL)
     {
         cout<<add(a,b)<<endl;
     }
-    else if (string(argv[1]) == "subtract" && argv[2]!=NULL & argv[3]!=NULL)
+    else if (string(argv[1]) == "subtract" && argv[2]!=NULL & argv[3]!=NULL && argv[4]==NULL)
     {
         cout<<subtract(a,b)<<endl;
     }
-    else if (string(argv[1]) == "volume" && argv[2]!=NULL & argv[3]!=NULL)
+    else if (string(argv[1]) == "volume" && argv[2]!=NULL & argv[3]!=NULL && argv[4]==NULL)
     {
         cout<<volume(a,b)<<endl;
     }
