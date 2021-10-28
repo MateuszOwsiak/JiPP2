@@ -130,7 +130,7 @@ double** multiplyMatrix(double** A,double** B,int rows,int columnsA,int columnsB
  * @param rows number of rows in matrix
  * @param columns number of columns in matrix
  * @param scalar a given scalar that the matrix is multiplied by
- * @return multiplied matirix by given scalar
+ * @return multiplied matrix by given scalar
  */
 int** multiplyByScalar(int** A,int rows,int columns,int scalar)
 {
@@ -191,12 +191,12 @@ double** transpozeMatrix(double** A,int rows,int columns)
 }
 
 /**
- * powerMatrix
+ * powerMatrix raise a matrix to given power
  * @param A matrix
  * @param rows number of rows in matrix
  * @param columns number of columns in matrix
  * @param power
- * @return
+ * @return matrix raised to the given power
  */
 int** powerMatrix(int**A,int rows,int columns,unsigned power)
 {
@@ -526,25 +526,27 @@ void help()
     cout<<"Input numbers that you want to put in the matrix using console"<<endl;
     cout<<endl;
     cout<<"Available operations: "<<endl;
-    cout<<"add [matrixA] [matrixB] [rows] [columns]"<<endl;
-    cout<<"  Adds matrixA to matrixB"<<endl;
-    cout<<"subtract [matrixA] [matrixB] [rows] [columns]"<<endl;
-    cout<<"  Subtracts matrixB from matrixA"<<endl;
-    cout<<"multiply [matrixA] [matrixB] [rows] [columnsA] [columnsB]"<<endl;
-    cout<<"  Multiplies matrixA by matrixB"<<endl;
-    cout<<"multiplyS [matrixA] [rows] [columns] [scalar]"<<endl;
-    cout<<"   Multiplies matrixA by scalar"<<endl;
-    cout<<"transpose [matrixA] [rows] [columns]"<<endl;
-    cout<<"  Transposes matrixA"<<endl;
-    cout<<"power [matrixA] [rows] [columns] [power]"<<endl;
+    cout<<"addMatrix"<<endl;
+    cout<<"  Adds two matrices"<<endl;
+    cout<<"subtractMatrix"<<endl;
+    cout<<"  Subtracts two matrices"<<endl;
+    cout<<"multiplyMatrix"<<endl;
+    cout<<"  Multiplies two matrices"<<endl;
+    cout<<"multiplyByScalar"<<endl;
+    cout<<"   Multiplies matrix by scalar"<<endl;
+    cout<<"transpozeMatrix"<<endl;
+    cout<<"  Transposes matrix"<<endl;
+    cout<<"powerMatrix"<<endl;
     cout<<"  Produces matrix raised to the given power"<<endl;
-    cout<<"determinant [matrixA] [rows] [columns]"<<endl;
+    cout<<"determinantMatrix"<<endl;
     cout<<"  Gives back the determinant of the matrix"<<endl;
-    cout<<"diagonal [matrixA] [rows] [columns]"<<endl;
+    cout<<"matrixIsDiagonal"<<endl;
     cout<<"  Checks if given matrix is diagonal or not"<<endl;
-    cout<<"swap [a] [b]"<<endl;
+    cout<<"swap"<<endl;
     cout<<"   Swaps two numbers"<<endl;
-    cout<<"sort [matrixA] [rows] [columns]"<<endl;
+    cout<<"sortRow"<<endl;
+    cout<<"   Sorts a given row (array)"<<endl;
+    cout<<"sortRowsInMatrix"<<endl;
     cout<<"  Sorts matrix by rows"<<endl;
     cout<<"help"<<endl;
     cout<<"  Gives information about the program"<<endl;

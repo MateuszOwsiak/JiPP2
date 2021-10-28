@@ -67,6 +67,9 @@ void getMatrix(double**A,int rows,int columns)
             }
         }
     }
+    //If user enters more numbers to matrix than it's expected
+    char c;
+    while((c = getchar()) != '\n' && c != EOF);
 }
 void getMatrix(int**A,int rows,int columns)
 {
@@ -74,10 +77,10 @@ void getMatrix(int**A,int rows,int columns)
     {
         for(int j=0; j<columns; j++)
         {
-            cin>>A[i][j];
+            cin >> A[i][j];
             while(cin.fail())
             {
-                cout<<"It seems like you didn't type a number typing matrix["<<i+1<<"]["<<j+1<<"]"<<endl;
+                cout<<"It seems like you didn't type a number typing matrix["<<i+1<<"]["<<j+1<<"] or that's not an integer"<<endl;
                 cout<<"Type again that element: ";
                 cin.clear();
                 cin.ignore();
@@ -85,6 +88,9 @@ void getMatrix(int**A,int rows,int columns)
             }
         }
     }
+    //If user enters more numbers to matrix than it's expected
+    char c;
+    while((c = getchar()) != '\n' && c != EOF);
 }
 /**
  * print prints matrix on the console
