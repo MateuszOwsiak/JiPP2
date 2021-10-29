@@ -6,14 +6,6 @@
 #include <iostream>
 using namespace std;
 
-/**
- * addMatrix adds two matrices
- * @param A first matrix
- * @param B second matrix
- * @param rows number of rows in matrices
- * @param columns number of columns in matrices
- * @return matrix that is sum of the two given matrices
- */
 int** addMatrix(int** A,int** B,int rows,int columns)
 {
     int**C = new int* [rows];
@@ -40,14 +32,6 @@ double** addMatrix(double**A,double **B,int rows,int columns)
     return C;
 }
 
-/**
- * subtractMatrix subtracts two matrices
- * @param A first matrix
- * @param B second matrix
- * @param rows number of rows in matrices
- * @param columns number of columns in matrices
- * @return matrix that is subtraction of the two given matrices
- */
 int** subtractMatrix(int** A,int** B,int rows,int columns)
 {
     int**C = new int* [rows];
@@ -74,15 +58,6 @@ double** subtractMatrix(double** A,double** B,int rows,int columns)
     return C;
 }
 
-/**
- * multiplyMatrix multiplies two matrices
- * @param A first matrix
- * @param B second matrix
- * @param rows number of rows in first matrix
- * @param columnsA number of columns in first matrix
- * @param columnsB number of columns in second matrix
- * @return matrix that is multiplication of the two given matrices
- */
 int** multiplyMatrix(int** A,int** B,int rows,int columnsA,int columnsB)
 {
     int** C = new int* [rows];
@@ -124,14 +99,6 @@ double** multiplyMatrix(double** A,double** B,int rows,int columnsA,int columnsB
     return C;
 }
 
-/**
- * multiplyByScalar multiplies matrix by scalar
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @param scalar a given scalar that the matrix is multiplied by
- * @return multiplied matrix by given scalar
- */
 int** multiplyByScalar(int** A,int rows,int columns,int scalar)
 {
     for(int i=0; i<rows; i++)
@@ -154,13 +121,6 @@ double** multiplyByScalar(double** A,int rows,int columns,double scalar)
     return A;
 }
 
-/**
- * transpozeMatrix transposes a matrix
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @return transposed matrix
- */
 int** transpozeMatrix(int** A,int rows,int columns)
 {
     int** C = new int*[rows];
@@ -190,14 +150,6 @@ double** transpozeMatrix(double** A,int rows,int columns)
     return C;
 }
 
-/**
- * powerMatrix raise a matrix to given power
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @param power
- * @return matrix raised to the given power
- */
 int** powerMatrix(int**A,int rows,int columns,unsigned power)
 {
     if(power == 0)
@@ -324,13 +276,6 @@ double** powerMatrix(double** A,int rows,int columns,unsigned power)
     return A;
 }
 
-/**
- * determinantMatrix gives determinant of matrix
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @return determinant of given matrix
- */
 int determinantMatrix(int** A,int rows,int columns)
 {
     double sgn = 1;
@@ -406,13 +351,6 @@ double determinantMatrix(double**A,int rows,int columns)
     return sgn*A[rows-1][columns-1];
 }
 
-/**
- * matrixIsDiagonal checks if matrix is diagonal
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @return true if given matirx is diagonal or false if not
- */
 bool matrixIsDiagonal(int** A,int rows,int columns)
 {
     for(int i=0; i<rows; i++)
@@ -436,11 +374,6 @@ bool matrixIsDiagonal(double** A,int rows,int columns)
     return true;
 }
 
-/**
- * swap swaps two given numbers
- * @param a the first number
- * @param b the second number
- */
 void swap(int& a,int& b)
 {
     int c = a;
@@ -454,12 +387,6 @@ void swap(double& a,double& b)
     b = c;
 }
 
-/**
- * sortRow sorts an array
- * @param A an array
- * @param columns number of numbers in the array
- * @return sorted array
- */
 int *sortRow(int* A,int columns)
 {
     for(int i=0; i<columns; i++)
@@ -489,13 +416,6 @@ double* sortRow(double* A,int columns)
     return A;
 }
 
-/**
- * sortRowInMatrix sorts rows in matrix ascendly
- * @param A matrix
- * @param rows number of rows in matrix
- * @param columns number of columns in matrix
- * @return matrix with sorted rows
- */
 int** sortRowsInMatrix(int** A,int rows,int columns)
 {
     for(int i = 0; i<rows; i++)
@@ -514,9 +434,6 @@ double** sortRowsInMatrix(double** A,int rows,int columns)
     return A;
 }
 
-/**
- * help gives information about program and its funcionalities
- */
 void help()
 {
     cout<<"Application that performs simple operations on matrices"<<endl;

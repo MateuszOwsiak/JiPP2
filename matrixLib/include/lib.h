@@ -61,12 +61,12 @@ int** transpozeMatrix(int** A,int rows,int columns);
 double** transpozeMatrix(double** A,int rows,int columns);
 
 /**
- * powerMatrix
+ * powerMatrix raise a matrix to given power
  * @param A matrix
  * @param rows number of rows in matrix
  * @param columns number of columns in matrix
  * @param power
- * @return
+ * @return matrix raised to the given power
  */
 int** powerMatrix(int**A,int rows,int columns,unsigned power);
 double** powerMatrix(double** A,int rows,int columns,unsigned power);
