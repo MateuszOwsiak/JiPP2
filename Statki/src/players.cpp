@@ -212,7 +212,6 @@ void autoset(P* player,int length,SHIPS s)
         k = ((rand() % 4 + 1) % 2 == 0 ? VERTICAL : HORIZONTAL);
 
         x_begin--; y_begin--;
-        //tutaj zmiana z VERTICAL na HORIZONTAL
         if (k == HORIZONTAL) {
             if (x_begin + length < 10)
             {
@@ -234,15 +233,6 @@ void autoset(P* player,int length,SHIPS s)
                             player->board[x_begin - 1][y_begin + 1] = 'O';
                         }
                     }
-                    /*
-                    if (y_begin - 1 >= 0) {
-                        board[x_begin][y_begin - 1] = 'O';
-                    }
-                    if (y_begin + 1 < 10) {
-                        board[x_begin][y_begin + 1] = 'O';
-                    }
-                    */
-                    ///ZAMIANA length na i
                     for (int i = 0; i < length; i++) {
                         if (y_begin - 1 >= 0) {
                             player->board[x_begin + i][y_begin - 1] = 'O';
@@ -260,14 +250,7 @@ void autoset(P* player,int length,SHIPS s)
                         }
                         player->board[x_begin + length][y_begin] = 'O';
                     }
-                    {               /*
-										ooo ooo ooo ooo  (x_begin-1,y_begin-1) (x_begin-1,y_begin) (x_begin-1,y_begin+1)
-										oxo oxo oxo	oxo  (x_begin,y_begin-1) (x_begin,y_begin) (x_begin,y_begin+1)
-										oxo oxo oxo	ooo  (x_begin+1,y_begin-1) (x_begin+1,y_begin) (x_begin+1,y_begin+1)
-										oxo oxo ooo      (x_begin+2,y_begin-1) (x_begin+2,y_begin) (x_begin+2,y_begin+1)
-										oxo ooo			 (x_begin+3,y_begin-1) (x_begin+3,y_begin) (x_begin+3,y_begin+1)
-										ooo				 (x_begin+4,y_begin-1) (x_begin+4,y_begin) (x_begin+4,y_begin+1)
-										*/
+                    {
 
                         t = true;
                     }
@@ -314,7 +297,7 @@ void autoset(P* player,int length,SHIPS s)
                 }
             }
         }
-        //TUTAJ ZAMIANIA Z HORIZONTAL NA VERTICAL
+
         else if (k == VERTICAL) {
             if (y_begin + length < 10) {
                 if (check(x_begin, y_begin, x_begin, y_begin + length, length, player->board)) {
@@ -324,11 +307,6 @@ void autoset(P* player,int length,SHIPS s)
                         player->board[x_begin][i] = 'X';
                         player->board_s[x_begin][i] = s;
                     }
-                    /*
-                    oooooo ooooo  oooo  ooo
-                    oxxxxo oxxxo  oxxo	oxo
-                    oooooo ooooo  oooo  ooo
-                    */
                     if (y_begin - 1 >= 0) {
                         if (x_begin - 1 >= 0) {
                             player->board[x_begin - 1][y_begin - 1] = 'O';
@@ -433,7 +411,6 @@ Player::~Player()
 void Player::operator++()
 {
     points++;
-    //return (*this);
 }
 void Player::SetBoard()
 {
@@ -537,11 +514,6 @@ void Player::SetShip(int length,SHIPS s)
             row_begin--; row_end--; column_begin--; column_end--;
             if (row_begin == row_end)
             {
-                /*
-                oooooo
-                oxxxxo
-                oooooo
-                */
                 if (column_begin < column_end) {
                     for (int i = column_begin; i < column_begin + 4; i++) {
                         board[row_begin][i] = 'X';
@@ -618,14 +590,6 @@ void Player::SetShip(int length,SHIPS s)
             }
             if (column_begin == column_end)
             {
-                /*
-                ooo
-                oxo
-                oxo
-                oxo
-                oxo
-                ooo
-                */
                 if (row_begin < row_end) {
                     for (int i = row_begin; i < row_begin + 4; i++) {
                         board[i][column_begin] = 'X';
@@ -766,11 +730,6 @@ void Player::SetShip(int length,SHIPS s)
             row_begin--; column_begin--; row_end--; column_end--;
             if (row_begin == row_end)
             {
-                /*
-                ooooo o(row_begin-1,column_begin-1) o(row_begin-1,column_begin) o(row_begin-1,column_begin+1) o(row_begin-1,column_begin+2) o(row_begin-1,column_begin+3)
-                oxxxo o(row_begin,column_begin-1) x(row_begin,column_begin) x(row_begin,column_begin+1) x(row_begin,column_begin+2) o(row_begin,column_begin+3)
-                ooooo o(row_begin+1,column_begin-1) o(row_begin+1,column_begin) o(row_begin+1,column_begin+1) o(row_begin+1,column_begin+2) o(row_begin+1,column_begin+3)
-                */
                 if (column_begin < column_end) {
                     for (int i = column_begin; i < column_begin + 3; i++) {
                         board[row_begin][i] = 'X';
@@ -850,14 +809,6 @@ void Player::SetShip(int length,SHIPS s)
                         board[i][column_begin] = 'X';
                         board_s[i][column_begin] = THREE;
                     }
-                    /*
-                    ooo - o(row_begin-1,column_begin-1) o(row_begin-1,column_begin) o(row_begin-1,column_begin+1)
-                    oxo - o(row_begin,column_begin-1) x(row_begin,column_begin) o(row_begin,column_begin+1)
-                    oxo - o(row_begin+1,column_begin-1) x(row_begin+1,column_begin) o(row_begin+1,column_begin+1)
-                    oxo - o(row_begin+2,column_begin-1) x(row_begin+2,column_begin) o(row_begin+2,column_begin+1)
-                    ooo - o(row_begin+3,column_begin-1) o(row_begin+3,column_begin) o(row_begin+3,column_begin+1)
-                    */
-
                     if (row_begin - 1 >= 0) {
                         board[row_begin - 1][column_begin] = 'O';
                         if (column_begin - 1 >= 0) {
@@ -995,12 +946,6 @@ void Player::SetShip(int length,SHIPS s)
             row_begin--; column_begin--; row_end--; column_end--;
             if (row_begin == row_end)
             {
-                /*
-                oooo - o(row_begin-1,column_begin-1) o(row_begin-1,column_begin) o(row_begin-1,column_begin+1) o(row_begin-1,column_begin+2)
-                oxxo - o(row_begin,column_begin-1) x(row_begin,column_begin) x(row_begin,column_begin+1) o(row_begin,column_begin+2)
-                oooo
-                */
-                //w tym samym wierszu kolumny w prawo
                 if (column_begin < column_end) {
                     for (int i = column_begin; i < column_begin + 2; i++) {
                         board[row_begin][i] = 'X';
@@ -1036,7 +981,6 @@ void Player::SetShip(int length,SHIPS s)
                         board[row_begin + 1][column_begin + 2] = 'O';
                     }
                 }
-                    //w tym samym wierszu kolumny w lewo
                 else {
                     for (int i = column_end; i < column_end + 2; i++) {
                         board[row_end][i] = 'X';
@@ -1076,13 +1020,6 @@ void Player::SetShip(int length,SHIPS s)
             }
             if (column_begin == column_end)
             {
-                //w tej samej kolumnie wiersze w dol
-                /*
-                ooo - o(row_begin-1,column_begin-1) o(row_begin-1,column_begin) o(row_begin-1,column_begin+1)
-                oxo - o(row_begin,column_begin-1) x(row_begin,column_begin) o(row_begin,column_begin+1)
-                oxo - o(row_begin+1,column_begin-1) ...
-                ooo - o(row_begin+2,column_begin-1) ...
-                */
                 if (row_begin < row_end) {
                     for (int i = row_begin; i < row_begin + 2; i++) {
                         board[i][column_begin] = 'X';
@@ -1116,7 +1053,6 @@ void Player::SetShip(int length,SHIPS s)
                         board[row_begin + 2][column_begin] = 'O';
                     }
                 }
-                    //w tej samej kolumnie wiersze w gore
                 else {
                     for (int i = row_end; i < row_end + 2; i++) {
                         board[i][column_end] = 'X';
@@ -1293,20 +1229,9 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
         }
         else if (hit_ship_p[nr - 1] == TWO && p_hit[nr - 1] == 2) {
             cout << "A two-masted ship was sunk!" << endl;
-            /*
-            dwie mozliwosci
 
-            oooo
-            oxxo
-            oooo
-            */
-            //lewy x jest ostatnim trafionym
             if ((x - 1 >= 0 && y < 10) && (board[x - 1][y] == 'X')) {
-                /*
-                    oooo
-                    oxxo o(x-1,y-2) x(x-1,y-1) x(x-1,y) o(x-1,y+1)
-                    oooo
-                */
+
                 if (x - 2 >= 0) {
                     board_to_check[x - 2][y - 1] = 'O';
                     board_to_check[x - 2][y] = 'O';
@@ -1334,7 +1259,7 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
             }
-                //prawy x jest ostatnim trafionym
+
             else if ((x - 1 >= 0 && y - 2 >= 0) && (board[x - 1][y - 2] == 'X')) {
 
                 if (x - 2 >= 0) {
@@ -1365,14 +1290,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                 }
 
             }
-
-                /*
-                ooo
-                oxo
-                oxo
-                ooo
-                */
-                //dolny x jest ostatnim trafionym
             else if ((x - 2 >= 0 && y - 1 >= 0) && (board[x - 2][y - 1] == 'X')) {
 
                 if (x - 3 >= 0) {
@@ -1402,7 +1319,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     board_to_check[x][y - 1] = 'O';
                 }
             }
-                //gorny x jest ostatnim trafiony
             else if ((x < 10 && y - 1 >= 0) && (board[x][y - 1] == 'X')) {
 
                 if (x - 2 >= 0) {
@@ -1439,13 +1355,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
         }
         else if (hit_ship_p[nr - 1] == THREE && p_hit[nr - 1] == 3) {
             cout << "A three-masted ship was sunk!" << endl;
-
-            /*
-            ooooo
-            oxxxo
-            ooooo
-            */
-            //lewy x jest ostatnim trafionym
             if ((x - 1 >= 0 && y < 10) && (board[x - 1][y] == 'X')) {
 
                 if (x - 2 >= 0) {
@@ -1478,7 +1387,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                 }
 
             }
-                //prawy x jest ostatnim trafionym
             else if ((x - 1 >= 0 && y - 2 >= 0) && (board[x - 1][y - 2] == 'X')) {
 
                 if (x - 2 >= 0) {
@@ -1510,14 +1418,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
             }
-                /*
-                ooo
-                oxo
-                oxo
-                oxo
-                ooo
-                */
-                //dolny x jest ostatnim trafionym
             else if ((x - 2 >= 0 && y - 1 >= 0) && (board[x - 2][y - 1] == 'X')) {
                 if (x - 4 >= 0)
                 {
@@ -1549,7 +1449,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     board_to_check[x][y - 1] = 'O';
                 }
             }
-                //gorny x jest ostatnim trafionym
             else if ((x < 10 && y - 1 >= 0) && (board[x][y - 1] == 'X')) {
                 if (x - 2 >= 0) {
                     board_to_check[x - 2][y - 1] = 'O';
@@ -1586,13 +1485,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
         }
         else if (hit_ship_p[nr - 1] == FOUR && p_hit[nr - 1] == 4) {
             cout << "A four-masted ship was sunk!" << endl;
-
-            /*
-            oooooo
-            oxxxxo
-            oooooo
-            */
-            //lewy x jest ostatnim trafionym
             if ((x - 1 >= 0 && y < 10) && (board[x - 1][y] == 'X')) {
                 if (x - 2 >= 0) {
                     board_to_check[x - 2][y - 1] = 'O';
@@ -1625,7 +1517,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
             }
-                //prawy x jest ostatnim trafionym
             else if ((x - 1 >= 0 && y - 2 >= 0) && (board[x - 1][y - 2] == 'X')) {
                 if (x - 2 >= 0) {
                     board_to_check[x - 2][y - 1] = 'O';
@@ -1658,16 +1549,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
             }
-
-                /*
-                ooo
-                oxo
-                oxo
-                oxo
-                oxo
-                ooo
-                */
-                //dolny x jest ostatnim trafionym
             else if ((x - 2 >= 0 && y - 1 >= 0) && (board[x - 2][y - 1] == 'X')) {
                 if (x - 5 >= 0) {
                     board_to_check[x - 5][y - 1] = 'O';
@@ -1700,7 +1581,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
                     board_to_check[x][y - 1] = 'O';
                 }
             }
-                //gorny x jest ostatnim trafionym
             else if ((x < 10 && y - 1 >= 0) && (board[x][y - 1] == 'X')) {
                 if (x - 2 >= 0) {
                     board_to_check[x - 2][y - 1] = 'O';
@@ -1744,18 +1624,9 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
             Game::Check();
         }
         else if(CurrentPlayer == PLAYER2) {
-            //p2++;
-            //points_2++;
             ++dynamic_cast<Player&>(*p2);
             Game::Check();
         }
-        /*else
-        {
-            AI++;
-            Game::Check();
-        }
-        */
-        //Sleep(1500);
     }
     else
     {
@@ -1769,7 +1640,6 @@ void Player::Move(char** board, char** board_to_check, SHIPS** board_s)
         else if (mode == '2') {
             CurrentPlayer = COMPUTER;
         }
-        //Sleep(1500);
     }
 }
 void Player::SetShips()
@@ -1900,14 +1770,7 @@ void Comp::SetShip(int length, SHIPS s)
                             board[x_begin - 1][y_begin + 1] = 'O';
                         }
                     }
-                    /*
-                    if (y_begin - 1 >= 0) {
-                        board[x_begin][y_begin - 1] = 'O';
-                    }
-                    if (y_begin + 1 < 10) {
-                        board[x_begin][y_begin + 1] = 'O';
-                    }
-                    */
+
                     for (int i = 0; i < length; i++) {
                         if (y_begin - 1 >= 0) {
                             board[x_begin + i][y_begin - 1] = 'O';
@@ -1925,15 +1788,7 @@ void Comp::SetShip(int length, SHIPS s)
                         }
                         board[x_begin + length][y_begin] = 'O';
                     }
-                    {					/*
-										ooo ooo ooo ooo  (x_begin-1,y_begin-1) (x_begin-1,y_begin) (x_begin-1,y_begin+1)
-										oxo oxo oxo	oxo  (x_begin,y_begin-1) (x_begin,y_begin) (x_begin,y_begin+1)
-										oxo oxo oxo	ooo  (x_begin+1,y_begin-1) (x_begin+1,y_begin) (x_begin+1,y_begin+1)
-										oxo oxo ooo      (x_begin+2,y_begin-1) (x_begin+2,y_begin) (x_begin+2,y_begin+1)
-										oxo ooo			 (x_begin+3,y_begin-1) (x_begin+3,y_begin) (x_begin+3,y_begin+1)
-										ooo				 (x_begin+4,y_begin-1) (x_begin+4,y_begin) (x_begin+4,y_begin+1)
-										*/
-
+                    {
                         t = true;
                     }
                 }
@@ -1988,11 +1843,6 @@ void Comp::SetShip(int length, SHIPS s)
                         board[x_begin][i] = 'X';
                         board_s[x_begin][i] = s;
                     }
-                    /*
-                    oooooo ooooo  oooo  ooo
-                    oxxxxo oxxxo  oxxo	oxo
-                    oooooo ooooo  oooo  ooo
-                    */
                     if (y_begin - 1 >= 0) {
                         if (x_begin - 1 >= 0) {
                             board[x_begin - 1][y_begin - 1] = 'O';
@@ -2067,13 +1917,10 @@ void Comp::SetShip(int length, SHIPS s)
 void Comp::operator++()
 {
     points++;
-    //return *this;
 }
 void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
 {
-    //srand(time(NULL));
     int x, y;
-    //pierwszy strzal
     if (hit_ship_c == EMPTY)
     {
         bool t = false;
@@ -2095,9 +1942,7 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
             good_x = x;
             good_y = y;
             Sleep(1500);
-            //AI++;
             ++dynamic_cast<Comp&>(*AI);
-            //points_2++;
             c_hit++;
             direction = VERTICAL;
 
@@ -2105,12 +1950,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                 cout << "A single mast was sunk! Your turn" << endl;
                 Sleep(1500);
                 hit_ship_c = EMPTY;
-
-                /*
-                 ooo
-                 oxo - o(good_x-1,good_y-2) x(good_x-1,good_y-1) o(good_x-1,good_y)
-                 ooo
-                */
                 int i, j;
                 i = good_x - 2;
                 j = good_y - 2;
@@ -2161,7 +2000,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                 good_y = 0;
                 Game::Check();
             }
-            //Game::Check();
         }
         else
         {
@@ -2171,66 +2009,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
             CurrentPlayer = PLAYER1;
         }
     }
-        /*
-        if (hit_ship_c == ONE) {
-            cout << "ZatoVERTICALo jednomasztowiec!" << endl;
-            Sleep(1500);
-            hit_ship_c = EMPTY;
-            int i, j;
-            i = good_x - 2;
-            j = good_y - 2;
-            c_hit = 0;
-            if (i >= 0 && j >= 0) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            j++;
-            if (i >= 0 && j >= 0 && j < 10) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            j++;
-            if (i >= 0 && j >= 0 && j < 10) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            i++;
-            j = good_y - 2;
-            if (j >= 0) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            j += 2;
-            if (j >= 0 && j < 10) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            i++;
-            j = good_y - 2;
-            if (i < 10 && j >= 0) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            j++;
-            if (i < 10 && j < 10) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            j++;
-            if (i < 10 && j < 10) {
-                board_to_check[i][j] = 'O';
-                checked_coordinates.push_back(make_pair(i + 1, j + 1));
-            }
-            good_x = 0;
-            good_y = 0;
-
-        }
-        */
     else
     {
         if (hit_ship_c == TWO)
         {
-            //Checkam drugi punkt w VERTICALie w dol
             if (good_x + 1 <= 10 && !if_checked(good_x + 1, good_y)) {
                 cout << "Checking coordinates (" << good_x + 1 << " , " << good_y << ")" << endl;
                 if (board[good_x][good_y - 1] == 'X')
@@ -2299,15 +2081,7 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
 
                     good_x = 0;
                     good_y = 0;
-                    //AI++;
-                    //points_2++;
                     ++dynamic_cast<Comp&>(*AI);
-                    /*
-                    ooo - o(good_x-2,good_y-2) o(good_x-2,good_y-1) o(good_x-2,good_y)
-                    oxo - o(good_x-1,good_y-2) x(good_x-1,good_y-1) o(good_x-1,good_y)
-                    oxo - o(good_x,good_y-2) x(good_x,good_y-1) o(good_x,good_y)
-                    ooo - o(good_x+1,good_y-2) o(good_x+1,good_y-1) o(good_x+1,good_y)
-                    */
                     Game::Check();
                 }
                 else
@@ -2320,7 +2094,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                 }
 
             }
-                //Checkam drugi punkt w VERTICALie w gore
             else if (good_x - 1 >= 1 && !if_checked(good_x - 1, good_y)) {
                 cout << "Checking coordinates (" << good_x - 1 << " , " << good_y << ")" << endl;
                 if (board[good_x - 2][good_y - 1] == 'X')
@@ -2390,8 +2163,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
 
                     good_x = 0;
                     good_y = 0;
-                    //AI++;
-                    //points_2++;
                     ++dynamic_cast<Comp&>(*AI);
                     Game::Check();
                 }
@@ -2405,7 +2176,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                 }
 
             }
-                //Checkam drugi punkt w poziomie w prawo
             else if (good_y + 1 <= 10 && !if_checked(good_x, good_y + 1))
             {
                 cout << "Checking coordinates (" << good_x << " , " << good_y + 1 << ")" << endl;
@@ -2417,11 +2187,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                     hit_ship_c = EMPTY;
                     c_hit = 0;
                     checked_coordinates.push_back(make_pair(good_x, good_y + 1));
-                    /*
-                    oooo - o(good_x-2,good_y-2) o(good_x-2,good_y-1) o(good_x-2,good_y) o(good_x-2,good_y+1)
-                    oxxo - o(good_x-1,good_y-2) x(good_x-1,good_y-1) x(good_x-1,trafioney) o(good_x-1,trafioney+1)
-                    oooo - o(good_x,good_y-2) o(good_x,good_y-1) o(good_x,good_y) o(good_x,good_y+1)
-                    */
                     int i, j;
                     i = good_x - 2;
                     j = good_y - 2;
@@ -2468,8 +2233,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                     good_x = 0;
                     good_y = 0;
-                    //AI++;
-                    //points_2++;
                     ++dynamic_cast<Comp&>(*AI);
                     Game::Check();
                 }
@@ -2483,7 +2246,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                 }
 
             }
-                //Checkam drugi punkty w poziomie w lewo
             else if (good_y - 1 >= 1 && !if_checked(good_x, good_y - 1))
             {
                 cout << "Checking coordinates (" << good_x << " , " << good_y - 1 << ")" << endl;
@@ -2542,8 +2304,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                     good_x = 0;
                     good_y = 0;
-                    //AI++;
-                    //points_2++;
                     ++dynamic_cast<Comp&>(*AI);
                     Game::Check();
                 }
@@ -2568,12 +2328,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         good_x -= 1;
                     }
                 }
-                //w dol
                 if (good_x + 1 <= 10 && !if_checked(good_x + 1, good_y))
                 {
                     cout << "Checking coordinates (" << good_x + 1 << " , " << good_y << ")" << endl;
                     if (board[good_x][good_y - 1] == 'X') {
-                        //AI++;
                         points_2++;
                         c_hit++;
                         if (c_hit != 3) {
@@ -2581,21 +2339,12 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x][good_y - 1] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x + 1, good_y));
-                            //if (good_x + 2 < 10)
                             good_x += 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 3) {
                             cout << "A three-masted ship was sunk! Your turn" << endl;
                             board_to_check[good_x][good_y - 1] = 'X';
                             Sleep(1500);
-                            /*
-                            ooo good_x-3
-                            oxo good_x-2
-                            oxo good_x-1 good_y-1
-                            oxo	good_x good_y-1
-                            ooo good_x+1 good_y-1
-                            */
                             checked_coordinates.push_back(make_pair(good_x + 1, good_y));
 
                             int i, j;
@@ -2686,13 +2435,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         }
                     }
                 }
-                    //w gore
                 else if (good_x - 1 >= 1 && !if_checked(good_x - 1, good_y))
                 {
                     cout << "Checking coordinates (" << good_x - 1 << " , " << good_y << ")" << endl;
                     if (board[good_x - 2][good_y - 1] == 'X') {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 3) {
@@ -2700,22 +2446,13 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 2][good_y - 1] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x - 1, good_y));
-                            //if (good_x - 2 >= 0)
                             good_x -= 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 3) {
                             cout << "A three-masted ship was sunk! Your turn" << endl;
                             board_to_check[good_x - 2][good_y - 1] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x - 1, good_y));
-                            /*
-                            ooo good_x-3
-                            oxo good_x-2
-                            oxo good_x-1 good_y-1
-                            oxo	good_x good_y-1
-                            ooo good_x+1 good_y-1
-                            */
                             int i, j;
                             i = good_x - 3;
                             j = good_y - 2;
@@ -2804,16 +2541,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         }
                     }
                 }
-
-                /*
-                else{
-                    if (c_hit == 1)
-                        direction = HORIZONTAL;
-                    if (c_hit == 2) {
-                        good_x -= 1;
-                    }
-                }
-                */
             }
             else if (direction == HORIZONTAL) {
 
@@ -2825,13 +2552,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
 
-                //w prawo
                 if (good_y + 1 <= 10 && !if_checked(good_x, good_y + 1))
                 {
                     cout << "Checking coordinates (" << good_x << " , " << good_y + 1 << ")" << endl;
                     if (board[good_x - 1][good_y] == 'X') {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 3) {
@@ -2839,9 +2563,7 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 1][good_y] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y + 1));
-                            //if (good_y + 2 >= 0)
                             good_y += 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 3)
                         {
@@ -2849,11 +2571,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 1][good_y] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y + 1));
-                            /*
-                            ooooo
-                            oxxxo
-                            ooooo
-                            */
                             int i, j;
                             i = good_x - 2;
                             j = good_y - 3;
@@ -2940,13 +2657,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         }
                     }
                 }
-                    //w lewo
                 else if (good_y - 1 >= 1 && !if_checked(good_x, good_y - 1))
                 {
                     cout << "Checking coordinates (" << good_x << " , " << good_y - 1 << ")" << endl;
                     if (board[good_x - 1][good_y - 2]) {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 3) {
@@ -2954,9 +2668,7 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 1][good_y - 2] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y - 1));
-                            //if (good_y - 2 >= 0)
                             good_y -= 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 3) {
                             cout << "A three-masted ship was sunk! Your turn" << endl;
@@ -3050,15 +2762,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         }
                     }
                 }
-                /*
-                else{
-                    if (c_hit == 1)
-                        direction = VERTICAL;
-                    if (c_hit == 2) {
-                        good_y -= 1;
-                    }
-                }
-                */
             }
         }
         else if (hit_ship_c == FOUR)
@@ -3076,14 +2779,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         good_x -= 2;
                     }
                 }
-                //w dol
                 if (good_x + 1 <= 10 && !if_checked(good_x + 1, good_y))
                 {
-                    //jesli nie moge juz isc w dol a directionunek to poziom to musze cofnac do poczatku
                     cout << "Checking coordinates (" << good_x + 1 << " , " << good_y << ")" << endl;
                     if (board[good_x][good_y - 1] == 'X') {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 4) {
@@ -3091,24 +2790,12 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x][good_y - 1] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x + 1, good_y));
-                            //if (good_x + 2 < 10)
                             good_x += 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 4) {
                             cout << "A four-masted ship was sunk! Your turn" << endl;
                             board_to_check[good_x][good_y - 1] = 'X';
                             checked_coordinates.push_back(make_pair(good_x + 1, good_y));
-
-                            /*
-                            ooo
-                            oxo x(good_x-3 good_y-1)
-                            oxo x(good_x-2 good_y-1)
-                            oxo x(good_x-1 good_y-1)
-                            oxo x(good_x good_y-1)
-                            ooo
-                            */
-
                             int i, j;
                             i = good_x - 4;
                             j = good_y - 2;
@@ -3212,13 +2899,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         CurrentPlayer = PLAYER1;
                     }
                 }
-                    //w gore
                 else if (good_x - 1 >= 1 && !if_checked(good_x - 1, good_y))
                 {
                     cout << "Checking coordinates (" << good_x - 1 << " , " << good_y << ")" << endl;
                     if (board[good_x - 2][good_y - 1] == 'X') {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 4) {
@@ -3233,14 +2917,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 2][good_y - 1] = 'X';
                             checked_coordinates.push_back(make_pair(good_x - 1, good_y + 1));
 
-                            /*
-                            ooo o(good_x-3,good_y-1)
-                            oxo x(good_x-2,good_y-1)
-                            oxo x(good_x-1,good_y-1)
-                            oxo x(good_x,good_y-1)
-                            oxo
-                            ooo
-                            */
                             int i, j;
                             i = good_x - 3;
                             j = good_y - 2;
@@ -3344,18 +3020,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         CurrentPlayer = PLAYER1;
                     }
                 }
-                /*
-                else {
-                    if(c_hit==1)
-                        direction = HORIZONTAL;
-                    if (c_hit == 2) {
-                        good_x -= 1;
-                    }
-                    if (c_hit == 3) {
-                        good_x -= 2;
-                    }
-                }
-                */
             }
             else if (direction == HORIZONTAL)
             {
@@ -3372,13 +3036,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                     }
                 }
 
-                //w prawo
                 if (good_y + 1 <= 10 && !if_checked(good_x, good_y + 1))
                 {
                     cout << "Checking coordinates (" << good_x << " , " << good_y + 1 << ")" << endl;
                     if (board[good_x - 1][good_y] == 'X') {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 4) {
@@ -3386,9 +3047,7 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 1][good_y] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y + 1));
-                            //if (good_y + 2 >= 0)
                             good_y += 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 4) {
                             cout << "A four-masted ship was sunk! Your turn" << endl;
@@ -3396,11 +3055,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y + 1));
 
-                            /*
-                            oooooo
-                            oxxxxo o(good_x-1,good_y-4) x(good_x-1,good_y-3) x(good_x-1,good_y-2) x(good_x-1,good_y-1) x(good_x-1,good_y) o(good_x-1,good_y+1)
-                            oooooo
-                            */
                             int i, j;
                             i = good_x - 2;
                             j = good_y - 4;
@@ -3501,13 +3155,10 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         CurrentPlayer = PLAYER1;
                     }
                 }
-                    //w lewo
                 else if (good_y - 1 >= 1 && !if_checked(good_x, good_y - 1))
                 {
                     cout << "Checking coordinates (" << good_x << " , " << good_y - 1 << ")" << endl;
                     if (board[good_x - 1][good_y - 2]) {
-                        //AI++;
-                        //points_2++;
                         ++dynamic_cast<Comp&>(*AI);
                         c_hit++;
                         if (c_hit != 4) {
@@ -3515,20 +3166,13 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                             board_to_check[good_x - 1][good_y - 2] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y - 1));
-                            //if (good_y - 2 >= 0)
                             good_y -= 1;
-                            //c_hit += 1;
                         }
                         else if (c_hit == 4) {
                             cout << "A four-masted ship was sunk! Your turn" << endl;
                             board_to_check[good_x - 1][good_y - 2] = 'X';
                             Sleep(1500);
                             checked_coordinates.push_back(make_pair(good_x, good_y - 1));
-                            /*
-                            oooooo
-                            oxxxxo o(good_x-1,good_y-3) x(good_x-1,good_y-2) x(good_x-1,good_y-1)
-                            oooooo
-                            */
                             int i, j;
                             i = good_x - 2;
                             j = good_y - 3;
@@ -3628,18 +3272,6 @@ void Comp::Move(char** board, char** board_to_check, SHIPS** board_s)
                         }
                     }
                 }
-                /*
-                else {
-                    if(c_hit==1)
-                        direction = VERTICAL;
-                    if (c_hit == 2) {
-                        good_y -= 1;
-                    }
-                    if (c_hit == 3) {
-                        good_y -= 2;
-                    }
-                }
-                */
             }
         }
     }
